@@ -9,4 +9,4 @@ spec:
       containers:
       - name: simple-spark-job-x2
         image: barteks/simple-spark-job-x2
-#        command: ["/submit.sh", "/x2.py"]
+        command: ["/submit.sh", "/x2.py"]

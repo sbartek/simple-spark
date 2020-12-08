@@ -62,8 +62,5 @@ spec:
       - name: simple-spark-worker
         image: barteks/simple-spark-worker
         imagePullPolicy: Always
-        resources:
-          requests:
-            cpu: "2"
         ports:
         - containerPort: 8081
