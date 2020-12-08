@@ -24,3 +24,7 @@ push:
 	docker push barteks/simple-spark-master
 	docker push barteks/simple-spark-worker
 	docker push barteks/simple-spark-job-x2
+
+run_k8s:
+	kubectl create deployment simple-spark-master --image barteks/simple-spark-master
+	kubectl expose deployment simple-spark-master --type=LoadBalancer --port 8080
