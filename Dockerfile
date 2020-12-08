@@ -23,6 +23,8 @@ RUN echo "**** install Python 3 ****" \
     && if [ -e /usr/bin/pip ]; then  rm /usr/bin/pip; fi \
     && ln -s pip3 /usr/bin/pip
 
+ENV SPARK_MASTER "spark://simple-spark-master:7077"
+
 # Fix the value of PYTHONHASHSEED
 ENV PYTHONHASHSEED 1
 
@@ -43,7 +45,6 @@ FROM simple-spark-base AS simple-spark-worker
 COPY worker.sh /
 
 ENV SPARK_WORKER_WEBUI_PORT 8081
-ENV SPARK_MASTER "spark://simple-spark-master:7077"
 
 EXPOSE 8081
 
@@ -51,9 +52,8 @@ CMD ["/bin/bash", "/worker.sh"]
 
 FROM simple-spark-base AS simple-spark-job-x2
 
-ENV SPARK_MASTER "spark://simple-spark-master:7077"
-
 COPY submit.sh /
 COPY examples/x2.py /
+COPY examples/two_plus_two.py /
 
-CMD ["/submit.sh", "/x2.py"]
+CMD ["/submit.sh", "/two_plus_two.py"]

@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simple-spark-job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: simple-spark-job-x2
+        image: barteks/simple-spark-job-x2
+#        command: ["/submit.sh", "/x2.py"]

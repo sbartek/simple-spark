@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-spark-cluster
+spec:
+  containers:
+  - name: simple-spark-master
+    image: barteks/simple-spark-master
+    ports:
+    - containerPort: 8080
+    - containerPort: 7077
+  - name: simple-spark-worker
+    image: barteks/simple-spark-worker
+    ports:
+    - containerPort: 8081
+  - name: simple-spark-job-x2
+    image: barteks/simple-spark-job-x2

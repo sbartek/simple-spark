@@ -19,12 +19,22 @@ submit_x2:
 submit_local_x2:
 	export SPARK_MASTER='spark://localhost:7077' && ./submit.sh examples/x2.py 
 
-
 push:
 	docker push barteks/simple-spark-master
 	docker push barteks/simple-spark-worker
 	docker push barteks/simple-spark-job-x2
 
-run_k8s:
+declarative_create_spark_cluster:
 	kubectl create deployment simple-spark-master --image barteks/simple-spark-master
 	kubectl expose deployment simple-spark-master --type=LoadBalancer --port 8080
+
+create_spark_cluster:
+	kubectl apply -f k8s/simple-spark-master-pod.yaml
+
+port-forward-spark:
+	kubectl port-forward simple-spark-master 8080	
+
+minikube:
+	minikube config set memory 8192
+	minikube config set cpus 4
+	minikube start
