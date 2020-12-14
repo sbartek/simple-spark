@@ -16,8 +16,16 @@ run:
 submit_local_x2:
 	export SPARK_MASTER='spark://localhost:7077' && ./submit.sh examples/x2.py 
 
+compile_scala_x2:
+	cd examples/simple-spark-job && sbt package
+
+submit_local_scala_x2:
+	export SPARK_MASTER='spark://localhost:7077' && ./submit.sh examples/simple-spark-job/target/scala-2.12/hello-spark_2.12-0.1.jar
+
 submit_x2:
 	docker run --network simple-spark-cluster simple-spark-job-x2
+
+
 
 push:
 	docker push barteks/simple-spark-master
