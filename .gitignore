@@ -1,3 +1,6 @@
+#scala
+**/target/*
+
 **/.idea/
 .java-version
 fairscheduler-statedump.log
