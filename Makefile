@@ -13,11 +13,11 @@ run:
 		-e SPARK_MASTER='spark://simple-spark-master:7077' \
 		barteks/simple-spark-worker
 
-submit_x2:
-	docker run --network simple-spark-cluster barteks/simple-spark-job-x2
-
 submit_local_x2:
 	export SPARK_MASTER='spark://localhost:7077' && ./submit.sh examples/x2.py 
+
+submit_x2:
+	docker run --network simple-spark-cluster simple-spark-job-x2
 
 push:
 	docker push barteks/simple-spark-master
@@ -38,3 +38,11 @@ minikube:
 	minikube config set memory 8192
 	minikube config set cpus 4
 	minikube start
+
+docker_k8s_build-14:
+	cd ${SPARK_HOME} &&\
+	./bin/docker-image-tool.sh -r barteks -t v3.0.1-j14 -p kubernetes/dockerfiles/spark/bindings/python/Dockerfile -b java_image_tag=14-slim build
+
+docker_k8s_build-8:
+	cd ${SPARK_HOME} &&\
+	./bin/docker-image-tool.sh -r barteks -t v3.0.1-8-jre-slim -p kubernetes/dockerfiles/spark/bindings/python/Dockerfile -b java_image_tag=8-jre-slim build

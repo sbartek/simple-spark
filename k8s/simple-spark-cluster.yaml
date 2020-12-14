@@ -44,7 +44,7 @@ spec:
         - containerPort: 6066
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: StatefulSet
 metadata:
   name: simple-spark-worker
   labels:
@@ -53,6 +53,8 @@ spec:
   selector:
     matchLabels:
       name: simple-spark-worker
+  serviceName: "simple-spark-worker"
+  replicas: 3 # by default is 1
   template:
     metadata:
       labels:

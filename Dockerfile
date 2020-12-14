@@ -56,4 +56,4 @@ COPY submit.sh /
 COPY examples/x2.py /
 COPY examples/two_plus_two.py /
 
-CMD ["/submit.sh", "/two_plus_two.py"]
+CMD ["/submit.sh", "/x2.py"]
